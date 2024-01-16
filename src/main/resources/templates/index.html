@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <title>Email sender</title>
+    <style>
+        .email-mon-logo{
+            width: 85px;
+            margin: 5px;
+        }
+        .email-mon-h2{
+            color: #fff;
+            font-size: 20px;
+        }
+        @media screen and (max-width: 700px) {
+            .email-mon-h2{
+                font-size: 16px;
+            }
+        }
+        p{
+            line-height: 1.5;
+        }
+        .section{
+            background: #ebebeb;
+            width: 60%;
+        }
+        @media screen and (max-width: 900px) {
+            .section{
+                width: 80%;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            .section{
+                width: 100%;
+            }
+        }
+        body{
+            display: flex;
+            justify-content: center;
+        }
+        .section-header{
+            background: #b22222;
+            padding: 1px 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .h3{
+            color: #b22222;
+            font-size: 22px;
+            margin-top: 5px;
+        }
+        .section-div{
+            padding: 25px;
+        }
+        .span-color{
+            color:#b22222;
+        }
+        .p-view{
+            text-align: center;
+            margin: 35px;
+        }
+        .span-a{
+            text-decoration: none;
+            font-size: 16px;
+            background: wheat;
+            padding: 12px 15px;
+            box-shadow: 2px 2px 10px grey;
+            border-radius: 5px;
+            color: firebrick;
+            font-weight: 600;
+            width: auto;
+            border: 1px solid;
+        }
+        .span-a-out{
+            display: flex;
+            justify-content: center;
+        }
+        .li-p{
+            margin-top: 0;
+        }
+        ul {
+            list-style-type: square;
+            font-size: 17px;
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <div class="section-header">
+            <img src="https://whoisfreaks.com/images/logo.webp" alt="whoisfreaks" class="email-mon-logo"><h2 class="email-mon-h2">WhoisFreaks Monitoring Tool</h2></div>
+
+        <div class="section-div">
+            <h3 class="h3">Domain monitor</h3>
+            <div>
+                <p>On <span th:text="${update_date}" class="span-color"></span>, domain monitor detected changes for <span th:text="${updatedData.size()}"></span> domain(s).</p>
+
+                <ul th:each="domain_name : ${updatedData}">
+                    <li>
+                        <p class="li-p"><span th:text="${domain_name.key}" class="span-color"></span> observed
+                            <span th:text="${domain_name.value.size()}"></span>
+                            changes on <span th:text="${update_date}" class="span-color"></span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            <p class="p-view">To view the full list of changes and configure the monitor, you can visit:</p>
+            <span class="span-a-out">
+                <a href="https://billing.whoisfreaks.com/monitoring" target="_blank" class="span-a">Monitoring Web Tool</a>
+            </span>
+        </div>
+    </section>
+</body>
+</html>
