@@ -18,7 +18,7 @@ public class HomeController {
         Map<String, List<FieldChange>> updatedData = new HashMap<>();
 
         List<FieldChange> domain1Changes = new ArrayList<>();
-        domain1Changes.add(new FieldChange("field1", "oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1", "newValue1newValue1newValue1newValue1newValue1newValue1newValue1newValue1newValue1"));
+        domain1Changes.add(new FieldChange("field1", "oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1old", "newValue1newValue1newValue1newValue1newValue1newValue1newValue1newValue1ne"));
         domain1Changes.add(new FieldChange("field2", "oldValue2", "newValue2"));
         updatedData.put("domain1", domain1Changes);
 
