@@ -18,14 +18,19 @@ public class HomeController {
         Map<String, List<FieldChange>> updatedData = new HashMap<>();
 
         List<FieldChange> domain1Changes = new ArrayList<>();
-        domain1Changes.add(new FieldChange("field1", "oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1old", "newValue1newValue1newValue1newValue1newValue1newValue1newValue1newValue1ne"));
-        domain1Changes.add(new FieldChange("field2", "oldValue2", "newValue2"));
+        domain1Changes.add(new FieldChange("field1", "oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1old", null));
+        domain1Changes.add(new FieldChange("domain_registered", "no", "yes"));
         updatedData.put("domain1", domain1Changes);
 
         List<FieldChange> domain2Changes = new ArrayList<>();
-        domain2Changes.add(new FieldChange("field3", "oldValue3", "newValue3"));
-        domain2Changes.add(new FieldChange("field4", "oldValue4", "newValue4"));
+        domain2Changes.add(new FieldChange("field3", null, "newValue3"));
+        domain2Changes.add(new FieldChange("domain_registered", "yes", "no"));
         updatedData.put("domain2", domain2Changes);
+
+        List<FieldChange> domain3Changes = new ArrayList<>();
+        domain3Changes.add(new FieldChange("field3", null, "newValue3"));
+        domain3Changes.add(new FieldChange("value3", "yeae", "das"));
+        updatedData.put("domain3", domain3Changes);
 
         model.addAttribute("updatedData", updatedData);
         model.addAttribute("update_date", LocalDate.now());
@@ -34,18 +39,18 @@ public class HomeController {
     }
 
     public static class FieldChange {
-        private String field_name;
+        private String field;
         private String old_value;
         private String new_value;
 
-        public FieldChange(String field_name, String old_value, String new_value) {
-            this.field_name = field_name;
+        public FieldChange(String field, String old_value, String new_value) {
+            this.field = field;
             this.old_value = old_value;
             this.new_value = new_value;
         }
 
-        public String getField_name() {
-            return field_name;
+        public String getField() {
+            return field;
         }
 
         public String getOld_value() {
