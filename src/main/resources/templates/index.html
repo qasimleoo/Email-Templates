@@ -6,11 +6,13 @@
     <title>Email sender</title>
 </head>
 <body style="width: 90%; position: sticky; left: 5%;">
-<section style="background: #ebebeb;">
-    <div style="background: #b22222; padding: 1px 10px; border-radius: 8px; text-align: center; line-height: 0; font-size: 0; height: 55px">
-        <h2 style="color: #fff; font-size: 20px; display: inline-block; vertical-align: middle; line-height: normal;">
-            WhoisFreaks Monitoring Tool
-        </h2>
+<section style="background: #ebebeb; border-radius: 10px;">
+    <div style="padding: 10px;">
+        <div style="background: #b22222; padding: 1px 10px; border-radius: 8px; text-align: center; line-height: 0; font-size: 0;">
+            <h2 style="color: #fff; font-size: 22px; display: inline-block; vertical-align: middle; line-height: normal;">
+                WhoisFreaks Monitoring Tool
+            </h2>
+        </div>
     </div>
 
     <div style="padding: 25px;">
@@ -22,53 +24,62 @@
 
         <div th:each="domain_name : ${updatedData}">
             <div style="border: 1px solid #bbb; padding: 15px; background: #fff; border-radius: 5px; margin-top: 20px;">
-                <div th:each="field_value : ${domain_name.value}">
-                    <div th:if="${field_value.field == 'domain_registered'} and ${field_value.new_value == 'no'} and ${field_value.old_value == 'yes'}">
-                        <p style="margin-top: 0; line-height: 1.5; font-size: 18px; margin-bottom: 15px;"><span th:text="${domain_name.key}" style="color: #b22222; font-weight: bold;"></span> is dropped on <span th:text="${update_date}" style="color: #b22222"></span>.</p>
+                <div th:if="${domain_name.value.![field].contains('domain_registered')} and ${domain_name.value.![old_value].contains('yes')} and ${domain_name.value.![new_value].contains('no')}">
+                    <p style="margin: 0; line-height: 1.5; font-size: 19px;"><span th:text="${domain_name.key}" style="color: #b22222; font-weight: bold;"></span> is dropped on <span th:text="${update_date}" style="color: #b22222"></span>.</p>
+                </div>
+                <div th:if="${domain_name.value.![field].contains('domain_registered')} and ${domain_name.value.![old_value].contains('no')} and ${domain_name.value.![new_value].contains('yes')}">
+                    <p style="margin-top: 0; line-height: 1.5; font-size: 19px; margin-bottom: 15px;"><span th:text="${domain_name.key}" style="color: #b22222; font-weight: bold;"></span> is registered on <span th:text="${update_date}" style="color: #b22222"></span>.</p>
+                    <div style="font-size: 18px; font-weight: 600; color: #8c1117; margin: 10px 0 -5px 0;">
+                        <span style="font-size: 16px; margin-right: 8px;">&#10133;</span>Fields added:
                     </div>
-                    <div th:if="${field_value.field == 'domain_registered'} and ${field_value.new_value == 'yes'} and ${field_value.old_value == 'no'}">
-                        <p style="margin-top: 0; line-height: 1.5; font-size: 18px; margin-bottom: 15px;"><span th:text="${domain_name.key}" style="color: #b22222; font-weight: bold;"></span> is registered on <span th:text="${update_date}" style="color: #b22222"></span>.</p>
+                    <div th:each="field_value : ${domain_name.value}">
+                        <div th:if="${field_value.old_value == null} and ${field_value.new_value != null}">
+                            <span style="font-size: 20px; color: firebrick; font-weight: 600; margin: 0 2px 0 30px;">&#9642;</span>
+                            <span th:text="${field_value.field} + ':'" style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+                            <p style="line-height: 1.5; font-size: 16px; display:inline-block; text-decoration:none; width:28%; word-break:break-all; vertical-align: middle; white-space:normal; padding-right:2%; margin-left: 15px;">
+                                <span th:text="${field_value.old_value == null ? '---' : field_value.old_value}"></span>
+                            </p>
+                            <span style="font-size: 37px; color: #ecd591; top: 9px; position: relative; font-weight: bold;">&rArr;</span>
+                            <p style="line-height: 1.5; font-size: 16px; display:inline-block; width: 28%; word-break:break-all; white-space:normal; vertical-align: middle;  padding-left: 2%;">
+                                <span th:text="${field_value.new_value == null ? '---' : field_value.new_value}"></span>
+                            </p>
+                        </div>
                     </div>
-<!--                    <div th:if="${isDropped == true} or ${isAdded == false}">-->
-<!--                        <p style="margin-top: 0; line-height: 1.5; font-size: 18px; margin-bottom: 15px;"><span th:text="${domain_name.key}" style="color: #b22222; font-weight: bold;"></span> WHOIS record changes on <span th:text="${update_date}" style="color: #b22222"></span>.</p>-->
-<!--                    </div>-->
                 </div>
 
-                <div th:each="field_value : ${domain_name.value}">
-                    <div th:if="${field_value.old_value == null} and ${field_value.new_value != null}">
-                        <div style="font-size: 18px; font-weight: 600; color: #8c1117; margin: 10px 0 -5px 0;"><span style="font-size: 16px;">&#10133;</span> Fields added:</div>
-                        <span style="font-size: 20px; color: firebrick; font-weight: 600; margin-right: 5px;">&bull;</span><span th:text="${field_value.field} + ':'" style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5;"></span>
-                        <p style="line-height: 1.5; font-size: 16px; display:inline-block; text-decoration:none; width:33%; word-break:break-all; vertical-align: middle; white-space:normal; padding-right:2%; margin-left: 15px;">
-                            <span th:text="${field_value.old_value == null ? '---' : field_value.old_value}"></span>
-                        </p>
-                        <span style="font-size: 37px; color: #ecd591; top: 9px; position: relative; font-weight: bold;">&rArr;</span>
-                        <p style="line-height: 1.5; font-size: 16px; display:inline-block; width: 33%; word-break:break-all; white-space:normal; vertical-align: middle;  padding-left: 2%;">
-                            <span th:text="${field_value.new_value == null ? '---' : field_value.new_value}"></span>
-                        </p>
+                <div th:if="${!domain_name.value.![field].contains('domain_registered')}">
+                    <p style="margin-top: 0; line-height: 1.5; font-size: 19px; margin-bottom: 15px;"><span th:text="${domain_name.key}" style="color: #b22222; font-weight: bold;"></span> WHOIS record changes on <span th:text="${update_date}" style="color: #b22222"></span>.</p>
+                    <div style="font-size: 18px; font-weight: 600; color: #8c1117; margin: 10px 0 -5px 0;" th:if="${#lists.contains(domain_name.value.![old_value != null and new_value != null], true)}">
+                        <span style="font-size: 16px; margin-right: 8px;">&#128260;</span>Fields updated:
                     </div>
-
-                    <div th:if="${field_value.old_value != null} and ${field_value.new_value == null}">
-                        <div style="font-size: 18px; font-weight: 600;color: #8c1117; margin: 10px 0 -5px 0;"><span style="font-size: 16px;">&#10134;</span> Fields removed:</div>
-                        <span style="font-size: 20px; color: firebrick; font-weight: 600; margin-right: 5px;">&bull;</span><span th:text="${field_value.field} + ':'" style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5;"></span>
-                        <p style="line-height: 1.5; font-size: 16px; display:inline-block; text-decoration:none; width:33%; word-break:break-all; vertical-align: middle; white-space:normal; padding-right:2%; margin-left: 15px;">
-                            <span th:text="${field_value.old_value == null ? '---' : field_value.old_value}"></span>
-                        </p>
-                        <span style="font-size: 37px; color: #ecd591; top: 9px; position: relative; font-weight: bold;">&rArr;</span>
-                        <p style="line-height: 1.5; font-size: 16px; display:inline-block; width: 33%; word-break:break-all; white-space:normal; vertical-align: middle;  padding-left: 2%;">
-                            <span th:text="${field_value.new_value == null ? '---' : field_value.new_value}"></span>
-                        </p>
+                    <div th:each="field_value : ${domain_name.value}">
+                        <div th:if="${field_value.old_value != null} and ${field_value.new_value != null}">
+                            <span style="font-size: 20px; color: firebrick; font-weight: 600; margin: 0 2px 0 30px;">&#9642;</span>
+                            <span th:text="${field_value.field} + ':'" style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+                            <p style="line-height: 1.5; font-size: 16px; display:inline-block; text-decoration:none; width:28%; word-break:break-all; vertical-align: middle; white-space:normal; padding-right:2%; margin-left: 15px;">
+                                <span th:text="${field_value.old_value == null ? '---' : field_value.old_value}"></span>
+                            </p>
+                            <span style="font-size: 37px; color: #ecd591; top: 9px; position: relative; font-weight: bold;">&rArr;</span>
+                            <p style="line-height: 1.5; font-size: 16px; display:inline-block; width: 28%; word-break:break-all; white-space:normal; vertical-align: middle;  padding-left: 2%;">
+                                <span th:text="${field_value.new_value == null ? '---' : field_value.new_value}"></span>
+                            </p>
+                        </div>
                     </div>
-
-                    <div th:if="${field_value.old_value != null} and ${field_value.new_value != null}">
-                        <div style="font-size: 18px; font-weight: 600; color: #8c1117; margin: 10px 0 -5px 0;"><span style="font-size: 16px;">&#128260;</span> Fields updated:</div>
-                        <span style="font-size: 20px; color: firebrick; font-weight: 600; margin-right: 5px;">&bull;</span><span th:text="${field_value.field} + ':'" style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5;"></span>
-                        <p style="line-height: 1.5; font-size: 16px; display:inline-block; text-decoration:none; width:33%; word-break:break-all; vertical-align: middle; white-space:normal; padding-right:2%; margin-left: 15px;">
-                            <span th:text="${field_value.old_value == null ? '---' : field_value.old_value}"></span>
-                        </p>
-                        <span style="font-size: 37px; color: #ecd591; top: 9px; position: relative; font-weight: bold;">&rArr;</span>
-                        <p style="line-height: 1.5; font-size: 16px; display:inline-block; width: 33%; word-break:break-all; white-space:normal; vertical-align: middle;  padding-left: 2%;">
-                            <span th:text="${field_value.new_value == null ? '---' : field_value.new_value}"></span>
-                        </p>
+                    <div style="font-size: 18px; font-weight: 600; color: #8c1117; margin: 10px 0 -5px 0;" th:if="${#lists.contains(domain_name.value.![old_value != null and new_value == null], true)}">
+                        <span style="font-size: 16px; margin-right: 8px;">&#10134;</span>Fields removed:
+                    </div>
+                    <div th:each="field_value : ${domain_name.value}">
+                        <div th:if="${field_value.old_value != null} and ${field_value.new_value == null}">
+                            <span style="font-size: 20px; color: firebrick; font-weight: 600; margin: 0 2px 0 30px;">&#9642;</span>
+                            <span th:text="${field_value.field} + ':'" style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+                            <p style="line-height: 1.5; font-size: 16px; display:inline-block; text-decoration:none; width:28%; word-break:break-all; vertical-align: middle; white-space:normal; padding-right:2%; margin-left: 15px;">
+                                <span th:text="${field_value.old_value == null ? '---' : field_value.old_value}"></span>
+                            </p>
+                            <span style="font-size: 37px; color: #ecd591; top: 9px; position: relative; font-weight: bold;">&rArr;</span>
+                            <p style="line-height: 1.5; font-size: 16px; display:inline-block; width: 28%; word-break:break-all; white-space:normal; vertical-align: middle;  padding-left: 2%;">
+                                <span th:text="${field_value.new_value == null ? '---' : field_value.new_value}"></span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

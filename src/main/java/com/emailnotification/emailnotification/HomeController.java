@@ -18,19 +18,44 @@ public class HomeController {
         Map<String, List<FieldChange>> updatedData = new HashMap<>();
 
         List<FieldChange> domain1Changes = new ArrayList<>();
-        domain1Changes.add(new FieldChange("field1", "oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1oldValue1old", null));
+        domain1Changes.add(new FieldChange("field1", null, "Added"));
         domain1Changes.add(new FieldChange("domain_registered", "no", "yes"));
         updatedData.put("domain1", domain1Changes);
 
         List<FieldChange> domain2Changes = new ArrayList<>();
-        domain2Changes.add(new FieldChange("field3", null, "newValue3"));
+        domain2Changes.add(new FieldChange("field3", "something", null));
         domain2Changes.add(new FieldChange("domain_registered", "yes", "no"));
         updatedData.put("domain2", domain2Changes);
 
         List<FieldChange> domain3Changes = new ArrayList<>();
-        domain3Changes.add(new FieldChange("field3", null, "newValue3"));
-        domain3Changes.add(new FieldChange("value3", "yeae", "das"));
+        domain3Changes.add(new FieldChange("field3", "null", "newValue3"));
+        domain3Changes.add(new FieldChange("value3", "null", "das"));
         updatedData.put("domain3", domain3Changes);
+
+        List<FieldChange> domain4Changes = new ArrayList<>();
+        domain4Changes.add(new FieldChange("field3", "value", null));
+        domain4Changes.add(new FieldChange("valye", "yes", "yes"));
+        updatedData.put("domain4", domain4Changes);
+
+        List<FieldChange> domain5Changes = new ArrayList<>();
+        domain5Changes.add(new FieldChange("field5", null, "Added"));
+        domain5Changes.add(new FieldChange("value5", "no", "yes"));
+        updatedData.put("domain5", domain5Changes);
+
+        List<FieldChange> domain6Changes = new ArrayList<>();
+        domain6Changes.add(new FieldChange("field3", "something", null));
+        domain6Changes.add(new FieldChange("s", "yes", "yes"));
+        updatedData.put("domain6", domain6Changes);
+
+        List<FieldChange> domain7Changes = new ArrayList<>();
+        domain7Changes.add(new FieldChange("field3", null, "old"));
+        domain7Changes.add(new FieldChange("value3", "upd", "new"));
+        updatedData.put("domain7", domain7Changes);
+
+        List<FieldChange> domain8Changes = new ArrayList<>();
+        domain8Changes.add(new FieldChange("field3", "value", null));
+        domain8Changes.add(new FieldChange("domain_registered", "yes", "no"));
+        updatedData.put("domain8", domain8Changes);
 
         model.addAttribute("updatedData", updatedData);
         model.addAttribute("update_date", LocalDate.now());
