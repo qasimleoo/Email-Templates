@@ -63,6 +63,21 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/brand")
+    public String brand(Model model) {
+        Map<String, Integer> brandData = new HashMap<>();
+
+        brandData.put("domainsDiscovered", 182);
+        brandData.put("domainsAdded", 7);
+        brandData.put("domainsUpdated", 38);
+        brandData.put("domainsDropped", 12);
+
+        model.addAttribute("brandData", brandData);
+        model.addAttribute("update_date", LocalDate.now());
+
+        return "brand";
+    }
+
     public static class FieldChange {
         private String field;
         private String old_value;
