@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <title>Email sender</title>
+</head>
+<body style="width: 60%; position: sticky; left: 20%;">
+<section style="background: #ebebeb; border-radius: 10px;">
+    <div style="padding: 10px;">
+        <div style="background: #b22222; padding: 1px 10px; border-radius: 8px; text-align: center; line-height: 0; font-size: 0;">
+            <h2 style="color: #fff; font-size: 22px; display: inline-block; vertical-align: middle; line-height: normal;">
+                WhoisFreaks Monitoring Tool
+            </h2>
+        </div>
+    </div>
+
+    <div style="padding: 25px;">
+        <h3 style="color: #b22222; font-size: 22px; margin-top: 5px;">Brand monitor</h3>
+        <div>
+            <p style="line-height: 1.5; font-size: 18px;">On <span th:text="${update_date}" style="color:#b22222;"></span>, brand monitor detected following changes.</p>
+            <p style="line-height: 1.5; font-size: 18px;">To view full list of domain changes please visit <a href="https://billing.whoisfreaks.com/monitoring" target="_blank" style="text-decoration: underline; color: #8c1117; font-weight: bold;">Monitoring Web Tool</a>.</p>
+        </div>
+
+        <div style="border: 1px solid #bbb; padding: 15px; background: #fff; border-radius: 5px; margin-top: 20px;">
+            <div th:each="changes : ${brandData}" th:if="${changes.key.equals('domainsDiscovered')} and ${changes.value != null}" style=" margin-bottom: 10px;">
+                <span style="font-size: 12px; color: firebrick; font-weight: 600; margin: 0 2px 0 30px;">&#9724;&#65039;</span>
+                <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 225px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                    <span th:if="${changes.key.equals('domainsDiscovered')}" th:text="'Domains discovered:'"></span>
+                </span>
+                <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+            </div>
+            <div th:each="changes : ${brandData}" th:if="${changes.key.equals('domainsAdded')} and ${changes.value != null}" style=" margin-bottom: 10px;">
+                <span style="font-size: 12px; color: firebrick; font-weight: 600; margin: 0 2px 0 30px;">&#9724;&#65039;</span>
+                <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 225px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                    <span th:if="${changes.key.equals('domainsAdded')}" th:text="'Newly added domains:'"></span>
+                </span>
+                <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+            </div>
+            <div th:each="changes : ${brandData}" th:if="${changes.key.equals('domainsUpdated')} and ${changes.value != null}" style=" margin-bottom: 10px;">
+                <span style="font-size: 12px; color: firebrick; font-weight: 600; margin: 0 2px 0 30px;">&#9724;&#65039;</span>
+                <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 225px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                    <span th:if="${changes.key.equals('domainsUpdated')}" th:text="'Updated domains (Whois):'"></span>
+                </span>
+                <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+            </div>
+            <div th:each="changes : ${brandData}" th:if="${changes.key.equals('domainsDropped')} and ${changes.value != null}" style=" margin-bottom: 10px;">
+                <span style="font-size: 12px; color: firebrick; font-weight: 600; margin: 0 2px 0 30px;">&#9724;&#65039;</span>
+                <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 225px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                    <span th:if="${changes.key.equals('domainsDropped')}" th:text="'Dropped domains:'"></span>
+                </span>
+                <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin: 35px; line-height: 1.5;">To view the full list of changes and configure the monitor, you can visit:</p>
+        <div style="text-align: center;">
+            <a href="https://billing.whoisfreaks.com/monitoring" target="_blank" style="text-decoration: none; font-size: 16px; background: rgba(193,9,14,0.81); padding: 12px 15px; box-shadow: 2px 2px 10px grey; border-radius: 5px; color: #ffffff; font-weight: 600; width: auto; border: 1px solid;">Monitoring Web Tool</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>
