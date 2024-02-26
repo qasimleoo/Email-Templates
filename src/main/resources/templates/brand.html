@@ -22,34 +22,71 @@
             <p style="line-height: 1.5; font-size: 18px;">To view full list of domain changes please visit <a href="https://billing.whoisfreaks.com/monitoring" target="_blank" style="text-decoration: underline; color: #8c1117; font-weight: bold;">Monitoring Web Tool</a>.</p>
         </div>
 
-        <div style="border: 1px solid #bbb; padding: 15px; background: #fff; border-radius: 5px; margin-top: 20px;">
-            <div th:each="changes : ${brandData}" th:if="${changes.key.equals('domainsDiscovered')} and ${changes.value != null}" style=" margin-bottom: 10px;">
-                <span style="font-size: 12px; color: firebrick; font-weight: 600; margin: 0 2px 0 30px;">&#9724;&#65039;</span>
-                <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 225px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
-                    <span th:if="${changes.key.equals('domainsDiscovered')}" th:text="'Domains discovered:'"></span>
-                </span>
-                <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
-            </div>
-            <div th:each="changes : ${brandData}" th:if="${changes.key.equals('domainsAdded')} and ${changes.value != null}" style=" margin-bottom: 10px;">
-                <span style="font-size: 12px; color: firebrick; font-weight: 600; margin: 0 2px 0 30px;">&#9724;&#65039;</span>
-                <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 225px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
-                    <span th:if="${changes.key.equals('domainsAdded')}" th:text="'Newly added domains:'"></span>
-                </span>
-                <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
-            </div>
-            <div th:each="changes : ${brandData}" th:if="${changes.key.equals('domainsUpdated')} and ${changes.value != null}" style=" margin-bottom: 10px;">
-                <span style="font-size: 12px; color: firebrick; font-weight: 600; margin: 0 2px 0 30px;">&#9724;&#65039;</span>
-                <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 225px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
-                    <span th:if="${changes.key.equals('domainsUpdated')}" th:text="'Updated domains (Whois):'"></span>
-                </span>
-                <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
-            </div>
-            <div th:each="changes : ${brandData}" th:if="${changes.key.equals('domainsDropped')} and ${changes.value != null}" style=" margin-bottom: 10px;">
-                <span style="font-size: 12px; color: firebrick; font-weight: 600; margin: 0 2px 0 30px;">&#9724;&#65039;</span>
-                <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 225px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
-                    <span th:if="${changes.key.equals('domainsDropped')}" th:text="'Dropped domains:'"></span>
-                </span>
-                <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+        <div th:each="detail : ${brands_data}">
+            <div style="border: 1px solid #bbb; padding: 15px; background: #fff; border-radius: 5px; margin-top: 20px;">
+                <div th:each="changes : ${detail}" th:if="${changes.key.equals('brand_keyword')} and ${changes.value != null} and !${changes.value.isEmpty}" style=" margin: 5px 0 10px 0; font-size: 19px; ">
+                    <span style="font-weight: 600; line-height: 1.5; display: inline-block;margin-left: 10px;">
+                        <span th:if="${changes.key.equals('brand_keyword')}" th:text="'Brand name:'"></span>
+                    </span>
+                    <span th:text="${changes.value}" style="color: #000; line-height: 1.5; font-weight: 600;"></span>
+                </div>
+
+                <div th:each="changes : ${detail}" th:if="${changes.key.equals('domainsDiscovered')} and ${changes.value != null} and ${changes.value != 0}" style=" margin-bottom: 10px;">
+                    <span style="font-size: 9px; color: firebrick; font-weight: 600; margin: 0 2px 0 10px;">&#9724;&#65039;</span>
+                    <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 275px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                        <span th:if="${changes.key.equals('domainsDiscovered')}" th:text="'Domains discovered:'"></span>
+                    </span>
+                    <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+                </div>
+                <div th:each="changes : ${detail}" th:if="${changes.key.equals('typosDomainsDiscovered')} and ${changes.value != null} and ${changes.value != 0} and ${detail.containsKey('typos_enabled')} and ${detail.get('typos_enabled')}" style=" margin-bottom: 10px;">
+                    <span style="font-size: 9px; color: firebrick; font-weight: 600; margin: 0 2px 0 10px;">&#9724;&#65039;</span>
+                    <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 275px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                        <span th:if="${changes.key.equals('typosDomainsDiscovered')}" th:text="'Typos Domains discovered:'"></span>
+                    </span>
+                    <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+                </div>
+                <div th:each="changes : ${detail}" th:if="${changes.key.equals('domainsAdded')} and ${changes.value != null} and ${changes.value != 0}" style=" margin-bottom: 10px;">
+                    <span style="font-size: 9px; color: firebrick; font-weight: 600; margin: 0 2px 0 10px;">&#9724;&#65039;</span>
+                    <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 275px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                        <span th:if="${changes.key.equals('domainsAdded')}" th:text="'Newly added domains:'"></span>
+                    </span>
+                    <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+                </div>
+                <div th:each="changes : ${detail}" th:if="${changes.key.equals('typosDomainsAdded')} and ${changes.value != null} and ${changes.value != 0} and ${detail.containsKey('typos_enabled')} and ${detail.get('typos_enabled')}" style=" margin-bottom: 10px;">
+                    <span style="font-size: 9px; color: firebrick; font-weight: 600; margin: 0 2px 0 10px;">&#9724;&#65039;</span>
+                    <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 275px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                        <span th:if="${changes.key.equals('typosDomainsAdded')}" th:text="'Typos Newly added domains:'"></span>
+                    </span>
+                    <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+                </div>
+                <div th:each="changes : ${detail}" th:if="${changes.key.equals('domainsUpdated')} and ${changes.value != null} and ${changes.value != 0}" style=" margin-bottom: 10px;">
+                    <span style="font-size: 9px; color: firebrick; font-weight: 600; margin: 0 2px 0 10px;">&#9724;&#65039;</span>
+                    <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 275px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                        <span th:if="${changes.key.equals('domainsUpdated')}" th:text="'Updated domains (Whois):'"></span>
+                    </span>
+                    <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+                </div>
+                <div th:each="changes : ${detail}" th:if="${changes.key.equals('typosDomainsUpdated')} and ${changes.value != null} and ${changes.value != 0} and ${detail.containsKey('typos_enabled')} and ${detail.get('typos_enabled')}" style=" margin-bottom: 10px;">
+                    <span style="font-size: 9px; color: firebrick; font-weight: 600; margin: 0 2px 0 10px;">&#9724;&#65039;</span>
+                    <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 275px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                        <span th:if="${changes.key.equals('typosDomainsUpdated')}" th:text="'Typos Updated domains (Whois):'"></span>
+                    </span>
+                    <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+                </div>
+                <div th:each="changes : ${detail}" th:if="${changes.key.equals('domainsDropped')} and ${changes.value != null} and ${changes.value != 0}" style=" margin-bottom: 10px;">
+                    <span style="font-size: 9px; color: firebrick; font-weight: 600; margin: 0 2px 0 10px;">&#9724;&#65039;</span>
+                    <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 275px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                        <span th:if="${changes.key.equals('domainsDropped')}" th:text="'Dropped domains:'"></span>
+                    </span>
+                    <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+                </div>
+                <div th:each="changes : ${detail}" th:if="${changes.key.equals('typosDomainsDropped')} and ${changes.value != null} and ${changes.value != 0} and ${detail.containsKey('typos_enabled')} and ${detail.get('typos_enabled')}" style=" margin-bottom: 10px;">
+                    <span style="font-size: 9px; color: firebrick; font-weight: 600; margin: 0 2px 0 10px;">&#9724;&#65039;</span>
+                    <span style="font-weight: 600; color: #8c1717; font-size: 17px; line-height: 1.5; width: 275px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;">
+                        <span th:if="${changes.key.equals('typosDomainsDropped')}" th:text="'Typos Dropped domains:'"></span>
+                    </span>
+                    <span th:text="${changes.value}" style="color: #000; font-size: 17px; line-height: 1.5; width: 150px; display: inline-block; overflow-wrap: break-word; vertical-align: middle;"></span>
+                </div>
             </div>
         </div>
 
