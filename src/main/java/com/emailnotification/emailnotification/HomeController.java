@@ -87,11 +87,9 @@ public class HomeController {
         brandData2.put("domainsAdded", 14);
         brandData2.put("domainsUpdated", 91);
         brandData2.put("domainsDropped", null);
-        brandData2.put("typos_enabled", false);
+        brandData2.put("typos_enabled", true);
         brandData2.put("typosDomainsDiscovered", 21);
         brandData2.put("typosDomainsAdded", 442);
-        brandData2.put("typosDomainsUpdated", 1);
-        brandData2.put("typosDomainsDropped", 2);
         brandsData.add(brandData2);
 
         Map<String, Object> brandData3 =  new HashMap<>();
@@ -108,6 +106,7 @@ public class HomeController {
 
         model.addAttribute("brands_data", brandsData);
         model.addAttribute("update_date", LocalDate.now());
+        model.addAttribute("username", "user123");
 
         return "brand";
     }
