@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -18,6 +19,7 @@ public class HomeController {
         Map<String, List<FieldChange>> updatedData = new HashMap<>();
 
         List<FieldChange> domain1Changes = new ArrayList<>();
+        domain1Changes.add(new FieldChange("field1", null, "Added"));
         domain1Changes.add(new FieldChange("field1", null, "Added"));
         domain1Changes.add(new FieldChange("domain_registered", "no", "yes"));
         updatedData.put("domain1", domain1Changes);
@@ -59,6 +61,13 @@ public class HomeController {
 
         model.addAttribute("updatedData", updatedData);
         model.addAttribute("update_date", LocalDate.now());
+
+        Map<String, List<FieldChange>> filteredData = updatedData.entrySet().stream()
+                .filter(entry -> entry.getValue().stream()
+                        .anyMatch(change -> "domain_registered".equals(change.getField()) && "yes".equals(change.getOld_value()) && "no".equals(change.getNew_value())))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        model.addAttribute("filteredData", filteredData);
 
         return "index";
     }
@@ -112,9 +121,9 @@ public class HomeController {
     }
 
     public static class FieldChange {
-        private String field;
-        private String old_value;
-        private String new_value;
+        private final String field;
+        private final String old_value;
+        private final String new_value;
 
         public FieldChange(String field, String old_value, String new_value) {
             this.field = field;
