@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div th:if="${!domain_name.value.![field].contains('domain_registered')}">
+                <div th:if="!${domain_name.value.![field].contains('domain_registered')}">
                     <p style="margin-top: 0; line-height: 1.5; font-size: 19px; margin-bottom: 15px;"><span th:text="${domain_name.key}" style="color: #b22222; font-weight: bold;"></span> WHOIS record changes on <span th:text="${update_date}" style="color: #b22222"></span>.</p>
                     <div style="font-size: 18px; font-weight: 600; color: #8c1117; margin: 10px 0 -5px 0;" th:if="${#lists.contains(domain_name.value.![old_value != null and new_value != null], true)}">
                         <span style="font-size: 16px; margin-right: 8px;">&#128260;</span>Fields updated:

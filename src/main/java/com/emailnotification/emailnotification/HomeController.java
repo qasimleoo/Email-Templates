@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -18,6 +19,7 @@ public class HomeController {
         Map<String, List<FieldChange>> updatedData = new HashMap<>();
 
         List<FieldChange> domain1Changes = new ArrayList<>();
+        domain1Changes.add(new FieldChange("field1", null, "Added"));
         domain1Changes.add(new FieldChange("field1", null, "Added"));
         domain1Changes.add(new FieldChange("domain_registered", "no", "yes"));
         updatedData.put("domain1", domain1Changes);
@@ -60,28 +62,68 @@ public class HomeController {
         model.addAttribute("updatedData", updatedData);
         model.addAttribute("update_date", LocalDate.now());
 
+        Map<String, List<FieldChange>> filteredData = updatedData.entrySet().stream()
+                .filter(entry -> entry.getValue().stream()
+                        .anyMatch(change -> "domain_registered".equals(change.getField()) && "yes".equals(change.getOld_value()) && "no".equals(change.getNew_value())))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        model.addAttribute("filteredData", filteredData);
+
         return "index";
     }
 
     @GetMapping("/brand")
     public String brand(Model model) {
-        Map<String, Integer> brandData = new HashMap<>();
+        List<Map<String, Object>> brandsData = new ArrayList<>();
 
-        brandData.put("domainsDiscovered", 182);
-        brandData.put("domainsAdded", 7);
-        brandData.put("domainsUpdated", 38);
-        brandData.put("domainsDropped", 12);
+        Map<String, Object> brandData1 =  new HashMap<>();
+        brandData1.put("brand_keyword", "Google");
+        brandData1.put("domainsDiscovered", 182);
+        brandData1.put("domainsAdded", 7);
+        brandData1.put("domainsUpdated", 38);
+        brandData1.put("domainsDropped", 12);
+        brandData1.put("typos_enabled", true);
+        brandData1.put("typosDomainsDiscovered", 91);
+        brandData1.put("typosDomainsAdded", 42);
+        brandData1.put("typosDomainsUpdated", 2);
+        brandData1.put("typosDomainsDropped", 102);
+        brandsData.add(brandData1);
 
-        model.addAttribute("brandData", brandData);
+
+        Map<String, Object> brandData2 =  new HashMap<>();
+        brandData2.put("brand_keyword", "WhoisFreaks");
+        brandData2.put("domainsDiscovered", 94);
+        brandData2.put("domainsAdded", 14);
+        brandData2.put("domainsUpdated", 91);
+        brandData2.put("domainsDropped", null);
+        brandData2.put("typos_enabled", true);
+        brandData2.put("typosDomainsDiscovered", 21);
+        brandData2.put("typosDomainsAdded", 442);
+        brandsData.add(brandData2);
+
+        Map<String, Object> brandData3 =  new HashMap<>();
+        brandData3.put("brand_keyword", "Facebook");
+        brandData3.put("domainsDiscovered", 0);
+        brandData3.put("domainsUpdated", 32);
+        brandData3.put("domainsDropped", null);
+        brandData3.put("typos_enabled", true);
+        brandData3.put("typosDomainsDiscovered", 91);
+        brandData3.put("typosDomainsAdded", 42);
+        brandData3.put("typosDomainsUpdated", 2);
+        brandData3.put("typosDomainsDropped", 102);
+        brandsData.add(brandData3);
+
+        model.addAttribute("brands_data", brandsData);
         model.addAttribute("update_date", LocalDate.now());
+        model.addAttribute("username", "user123");
 
         return "brand";
     }
 
     public static class FieldChange {
-        private String field;
-        private String old_value;
-        private String new_value;
+        private final String field;
+        private final String old_value;
+        private final String new_value;
 
         public FieldChange(String field, String old_value, String new_value) {
             this.field = field;
