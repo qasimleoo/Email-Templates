@@ -8,7 +8,7 @@
 <body style="width: 99%; position: sticky;">
 <section style="background: #ebebeb; border-radius: 10px;">
     <div style="padding: 10px;">
-        <div style="background: #b22222; padding: 1px 10px; border-radius: 8px; text-align: center; line-height: 0; font-size: 0;">
+        <div style="background: firebrick; padding: 1px 10px; border-radius: 8px; text-align: center; line-height: 0; font-size: 0;">
             <h2 style="color: #fff; font-size: 22px; display: inline-block; vertical-align: middle; line-height: normal;">
                 WhoisFreaks Support
             </h2>
@@ -17,22 +17,22 @@
 
     <div style="padding: 25px;">
         <div style="font-size: 18px">
-            Hi <span style="font-weight: 600; color: firebrick" th:text="${username}"></span>,
+            Hi <span style="font-weight: 600; color:firebrick;" th:text="${username}"></span>,
         </div>
 
         <table style="background: aliceblue; border-radius: 8px; width: 100%; text-align: center; border: 1px solid #858585; margin-top: 20px;">
             <tr>
-                <th style="width: 33.33%; background-color: #c1c1c1; border: 1px solid #b8b7b7; color:#8c1117; padding: 10px; font-weight: bold; border-radius: 5px;">Lookup</th>
-                <th style="width: 33.33%; background-color: #c1c1c1; border: 1px solid #b8b7b7; color:#8c1117; padding: 10px; font-weight: bold; border-radius: 5px;">Status Code</th>
-                <th style="width: 33.33%; background-color: #c1c1c1; border: 1px solid #b8b7b7; color:#8c1117; padding: 10px; font-weight: bold; border-radius: 5px;">Failure Count</th>
+                <th style="width: 33.33%; background-color: #b22222; border: 1px solid #b8b7b7; color:#fff; padding: 10px; font-weight: bold; border-radius: 5px;">Lookup</th>
+                <th style="width: 33.33%; background-color: #b22222; border: 1px solid #b8b7b7; color:#fff; padding: 10px; font-weight: bold; border-radius: 5px;">Status Code</th>
+                <th style="width: 33.33%; background-color: #b22222; border: 1px solid #b8b7b7; color:#fff; padding: 10px; font-weight: bold; border-radius: 5px;">Failure Count</th>
             </tr>
-            <tr th:each="entry : ${failed_status_data}">
-                <td style="background-color: #f1f1f1; border: 1px solid #a1a1a1; padding: 5px; border-radius: 5px;" th:text="${entry.key}"></td>
+            <tr th:each="entry, counter : ${failed_status_data}">
+                <td th:text="${entry.key}" th:style="${counter.index % 2 == 1} ? 'background-color: #ccc; border: 1px solid #a1a1a1; padding: 5px; border-radius: 5px;' : 'background-color: #f1f1f1; border: 1px solid #a1a1a1; padding: 5px; border-radius: 5px;'"></td>
                 <td colspan="2">
                     <table style="border-radius: 8px; width: 100.5%; text-align: center; margin: -3px;">
                         <tr th:each="innerEntry : ${entry.value}">
-                            <td style="width: 50%; background-color: #f1f1f1; border: 1px solid #a1a1a1; padding: 5px; border-radius: 5px;"  th:text="${innerEntry.key}"></td>
-                            <td style="width: 50%; background-color: #f1f1f1; border: 1px solid #a1a1a1; padding: 5px; border-radius: 5px;"  th:text="${innerEntry.value}"></td>
+                            <td th:text="${innerEntry.key}" th:style="${counter.index % 2 == 1} ? 'background-color: #ccc; width: 50%; border: 1px solid #a1a1a1; padding: 5px; border-radius: 5px;' : 'width: 50%; background-color: #f1f1f1; border: 1px solid #a1a1a1; padding: 5px; border-radius: 5px;'"></td>
+                            <td th:text="${innerEntry.value}" th:style="${counter.index % 2 == 1} ? 'background-color: #ccc; width: 50%; border: 1px solid #a1a1a1; padding: 5px; border-radius: 5px;' : 'width: 50%; background-color: #f1f1f1; border: 1px solid #a1a1a1; padding: 5px; border-radius: 5px;'"></td>
                         </tr>
                     </table>
                 </td>

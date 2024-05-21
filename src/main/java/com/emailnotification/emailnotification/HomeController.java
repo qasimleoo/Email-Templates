@@ -141,11 +141,15 @@ public class HomeController {
         failedStatusData.get("Live Whois Lookup").add(new AbstractMap.SimpleEntry<>("403", 23));
 
         failedStatusData.putIfAbsent("Live Dns Lookup", new ArrayList<>());
-        failedStatusData.get("Live Dns Lookup").add(new AbstractMap.SimpleEntry<>("429", 30));
-        failedStatusData.get("Live Dns Lookup").add(new AbstractMap.SimpleEntry<>("403", 92));
+        failedStatusData.get("Live Dns Lookup").add(new AbstractMap.SimpleEntry<>("403", 9));
+        failedStatusData.get("Live Dns Lookup").add(new AbstractMap.SimpleEntry<>("429", 31));
 
         failedStatusData.putIfAbsent("SSL Live Lookup", new ArrayList<>());
         failedStatusData.get("SSL Live Lookup").add(new AbstractMap.SimpleEntry<>("429", 52));
+
+        failedStatusData.putIfAbsent("Historical Dns Lookup", new ArrayList<>());
+        failedStatusData.get("Historical Dns Lookup").add(new AbstractMap.SimpleEntry<>("403", 21));
+        failedStatusData.get("Historical Dns Lookup").add(new AbstractMap.SimpleEntry<>("429", 19));
 
         model.addAttribute("username", "XYZ");
         model.addAttribute("date", LocalDate.now());
