@@ -20,6 +20,13 @@
             Hi <span style="font-weight: 600; color:firebrick;" th:text="${username}"></span>,
         </div>
 
+        <div style="font-size: 17px; line-height: 0.7; margin-bottom: 25px;">
+            <p>We have observed that your requests have been failing with status codes <span style="font-weight: 600; color: firebrick">401</span> and <span style="font-weight: 600; color: firebrick">429</span>.
+            </p>
+            <p>Do not worry at all, our team is here to help you resolve all the issues you have been facing.</p>
+            <p>The table below displays all the lookup requests you have made, along with their status codes and the count of how many times each lookup has failed.</p>
+        </div>
+
         <table style="background: aliceblue; border-radius: 8px; width: 100%; text-align: center; border: 1px solid #858585; margin-top: 20px;">
             <tr>
                 <th style="width: 33.33%; background-color: #b22222; border: 1px solid #b8b7b7; color:#fff; padding: 10px; font-weight: bold; border-radius: 5px;">Lookup</th>
@@ -39,9 +46,28 @@
             </tr>
         </table>
 
-        <p style="margin-top: 10px; line-height: 1.5;">But if you are still facing any problem and need assistance, please don't hesitate to reach out to us.
-            <span style="color: firebrick; font-weight: 600;">support@whoisfreaks.com</span>.
-        </p>
+        <p style="margin: 25px 0 -5px 0;">Following are some possible reasons for receiving status codes <span style="font-weight: 600; color: firebrick">401</span> and <span style="font-weight: 600; color: firebrick">429</span>:</p>
+        <ul style="line-height: 1.5; margin: 0 0 20px -20px;">
+            <li>
+                <p style="font-weight: 600; color: firebrick; margin: 25px 0 5px 0; font-size: 18px;">401:</p>
+                <ol style="line-height: 1.5; margin-left: -20px;">
+                    <li>Your API key might be <b>invalid</b>.</li>
+                    <li>Your API key might be <b>inactive</b>.</li>
+                    <li>You have to <b>buy a subscription plan</b>, or please <b>add api credits</b> then use this api key.</li>
+                    <li>Your <b>subscription might be deactivated</b>. Please <b>buy a new plan</b> or <b>add api credits</b> for using WhoisFreaks APIs.</li>
+                    <li>Your <b>subscription might be deactivated due to multiple payment failures</b>. Please <b>buy a new plan</b> or <b>add API credits</b> to continue using WhoisFreaks APIs.</li>
+                    <li>Your <b>account might have been deactivated</b>.</li>
+                </ol>
+                <p style="font-weight: 600; font-size: 18px; margin-top: 5px;">If you still have any queries, please reach out to us at <span style="color: firebrick; font-weight: 600;">support@whoisfreaks.com</span>.</p>
+            </li>
+            <li>
+                <p style="font-weight: 600; color: firebrick; margin: 15px 0 5px 0; font-size: 18px;">429:</p>
+                <ul style="line-height: 1.5; margin-left: -20px;">
+                    <li>Your have <b>reached your maximum request limit</b>. Please <b>upgrade your plan</b>, <b>buy a new plan</b>, or <b>add more API credits</b> to use APIs.</li>
+                </ul>
+                <p style="font-weight: bold; font-size: 18px; margin-top: 5px;">For a better solution, please contact us at <span style="color: firebrick;">support@whoisfreaks.com</span></p>
+            </li>
+        </ul>
         <p style="margin-bottom: -7px; font-weight: bold;">Regards,</p>
         <p style="font-weight: bold; color: firebrick; margin-bottom: -5px;">WhoisFreaks</p>
     </div>
