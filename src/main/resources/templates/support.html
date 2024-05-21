@@ -30,21 +30,21 @@
         <div style="font-size: 17px;">
             <p style="margin-bottom: -8px;">The following are possible reasons for receiving a <span style="font-weight: 600; color: firebrick" th:text="${support_data['error_code']}"></span> status code:</p>
             <div style="line-height: 1.3;">
-                <ul th:if="${support_data['error_code'] == '400'} and (${support_data['request_type'] == 'Whois Live'}
-                            or ${support_data['request_type'] == 'Whois Historical'} or ${support_data['request_type'] == 'SSL Live'})">
+                <ul th:if="${support_data['error_code'] == '400'} and (${support_data['request_type'] == 'Live Whois'}
+                            or ${support_data['request_type'] == 'Historical Whois'} or ${support_data['request_type'] == 'SSL Lookup'})">
                     <li>You passed incorrect domainName parameter's value (correct formats are whoisfreaks.com, https://whoisfreaks.com, http://whoisfreaks.com).</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '400'} and (${support_data['request_type'] == 'Whois Reverse'})">
+                <ul th:if="${support_data['error_code'] == '400'} and (${support_data['request_type'] == 'Reverse Whois'})">
                     <li>Please pass parameter values, you might have not passed parameters.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '400'} and (${support_data['request_type'] == 'DNS Live'}
-                            or ${support_data['request_type'] == 'DNS Historical'} or ${support_data['request_type'] == 'DNS Reverse'})">
+                <ul th:if="${support_data['error_code'] == '400'} and (${support_data['request_type'] == 'Live DNS'}
+                            or ${support_data['request_type'] == 'Historical DNS'} or ${support_data['request_type'] == 'Reverse DNS'})">
                     <li>Could not process your request.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '401'} and (${support_data['request_type'] == 'Whois Live'}
-                            or ${support_data['request_type'] == 'Whois Historical'} or ${support_data['request_type'] == 'Whois Reverse'}
-                            or ${support_data['request_type'] == 'SSL Live'} or ${support_data['request_type'] == 'DNS Live'}
-                            or ${support_data['request_type'] == 'DNS Historical'} or ${support_data['request_type'] == 'DNS Reverse'})"
+                <ul th:if="${support_data['error_code'] == '401'} and (${support_data['request_type'] == 'Live Whois'}
+                            or ${support_data['request_type'] == 'Historical Whois'} or ${support_data['request_type'] == 'Reverse Whois'}
+                            or ${support_data['request_type'] == 'SSL Lookup'} or ${support_data['request_type'] == 'Live DNS'}
+                            or ${support_data['request_type'] == 'Historical DNS'} or ${support_data['request_type'] == 'Reverse DNS'})"
                     style="line-height: 1.5;">
                     <li>Your API key might be <span>invalid</span>.</li>
                     <li>Your API key might be <span>inactive</span>.</li>
@@ -53,74 +53,74 @@
                     <li>Your subscription might be deactivated due to multiple payment failures. Please buy a new plan or add API credits to continue using WhoisFreaks APIs.</li>
                     <li>Your account might have been deactivated.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '403'} and (${support_data['request_type'] == 'Whois Live'})" style="line-height: 1.5;">
+                <ul th:if="${support_data['error_code'] == '403'} and (${support_data['request_type'] == 'Live Whois'})" style="line-height: 1.5;">
                     <li>We might not be providing the whois for provided domain's extension.</li>
                     <li>Provided domain might belong to an inactive TLD. You can try <a href="https://whoisfreaks.com/tools/whois/history/lookup" th:target="_blank" style="color: firebrick; font-weight: bold;">Historical whois lookup</a>.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '404'} and (${support_data['request_type'] == 'Whois Historical'}
-                            or ${support_data['request_type'] == 'Whois Reverse'})"
+                <ul th:if="${support_data['error_code'] == '404'} and (${support_data['request_type'] == 'Historical Whois'}
+                            or ${support_data['request_type'] == 'Reverse Whois'})"
                     style="line-height: 1.5;">
                     <li>Record could not be found for the requested domain name.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '404'} and (${support_data['request_type'] == 'SSL Live'})"
+                <ul th:if="${support_data['error_code'] == '404'} and (${support_data['request_type'] == 'SSL Lookup'})"
                     style="line-height: 1.5;">
                     <li>No SSL Certificate exists for provided domain name.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '404'} and (${support_data['request_type'] == 'DNS Live'})"
+                <ul th:if="${support_data['error_code'] == '404'} and (${support_data['request_type'] == 'Live DNS'})"
                     style="line-height: 1.5;">
                     <li>Entered Domain does not exist: (Please enter correct formats e.g., whoisfreaks.com, https://whoisfreaks.com, http://whoisfreaks.com)</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '404'} and (${support_data['request_type'] == 'DNS Historical'} or ${support_data['request_type'] == 'DNS Reverse'})"
+                <ul th:if="${support_data['error_code'] == '404'} and (${support_data['request_type'] == 'Historical DNS'} or ${support_data['request_type'] == 'Reverse DNS'})"
                     style="line-height: 1.5;">
                     <li>No Record Found across entered input value.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '408'} and (${support_data['request_type'] == 'Whois Live'})" style="line-height: 1.5;">
+                <ul th:if="${support_data['error_code'] == '408'} and (${support_data['request_type'] == 'Live Whois'})" style="line-height: 1.5;">
                     <li>Unable to fetch Whois data for entered domain name.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '408'} and (${support_data['request_type'] == 'DNS Live'}
-                            or ${support_data['request_type'] == 'DNS Historical'} or ${support_data['request_type'] == 'DNS Reverse'})" style="line-height: 1.5;">
+                <ul th:if="${support_data['error_code'] == '408'} and (${support_data['request_type'] == 'Live DNS'}
+                            or ${support_data['request_type'] == 'Historical DNS'} or ${support_data['request_type'] == 'Reverse DNS'})" style="line-height: 1.5;">
                     <li>Unable to fetch DNS records for entered domain name.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '412'} and (${support_data['request_type'] == 'Whois Live'}
-                            or ${support_data['request_type'] == 'Whois Historical'} or ${support_data['request_type'] == 'Whois Reverse'}
-                            or ${support_data['request_type'] == 'SSL Live'} or ${support_data['request_type'] == 'DNS Live'}
-                            or ${support_data['request_type'] == 'DNS Historical'} or ${support_data['request_type'] == 'DNS Reverse'})"
+                <ul th:if="${support_data['error_code'] == '412'} and (${support_data['request_type'] == 'Live Whois'}
+                            or ${support_data['request_type'] == 'Historical Whois'} or ${support_data['request_type'] == 'Reverse Whois'}
+                            or ${support_data['request_type'] == 'SSL Lookup'} or ${support_data['request_type'] == 'Live DNS'}
+                            or ${support_data['request_type'] == 'Historical DNS'} or ${support_data['request_type'] == 'Reverse DNS'})"
                     style="line-height: 1.5;">
                     <li>You might have exceeded the limit of API plan requests, and therefore your subscription might have been canceled.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '413'} and (${support_data['request_type'] == 'Whois Live'}
-                            or ${support_data['request_type'] == 'Whois Historical'} or ${support_data['request_type'] == 'Whois Reverse'}
-                            or ${support_data['request_type'] == 'SSL Live'} or ${support_data['request_type'] == 'DNS Live'}
-                            or ${support_data['request_type'] == 'DNS Historical'} or ${support_data['request_type'] == 'DNS Reverse'})"
+                <ul th:if="${support_data['error_code'] == '413'} and (${support_data['request_type'] == 'Live Whois'}
+                            or ${support_data['request_type'] == 'Historical Whois'} or ${support_data['request_type'] == 'Reverse Whois'}
+                            or ${support_data['request_type'] == 'SSL Lookup'} or ${support_data['request_type'] == 'Live DNS'}
+                            or ${support_data['request_type'] == 'Historical DNS'} or ${support_data['request_type'] == 'Reverse DNS'})"
                     style="line-height: 1.5;">
                     <li>You might have exceeded the limit of Surcharge Requests [allowed_surcharge_request_no].</li>
                     <li>You might have exceeded the limit of API credits requests [allowed_request_no].</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '429'} and (${support_data['request_type'] == 'Whois Live'}
-                            or ${support_data['request_type'] == 'Whois Historical'} or ${support_data['request_type'] == 'Whois Reverse'}
-                            or ${support_data['request_type'] == 'SSL Live'} or ${support_data['request_type'] == 'DNS Live'}
-                            or ${support_data['request_type'] == 'DNS Historical'} or ${support_data['request_type'] == 'DNS Reverse'})"
+                <ul th:if="${support_data['error_code'] == '429'} and (${support_data['request_type'] == 'Live Whois'}
+                            or ${support_data['request_type'] == 'Historical Whois'} or ${support_data['request_type'] == 'Reverse Whois'}
+                            or ${support_data['request_type'] == 'SSL Lookup'} or ${support_data['request_type'] == 'Live DNS'}
+                            or ${support_data['request_type'] == 'Historical DNS'} or ${support_data['request_type'] == 'Reverse DNS'})"
                     style="line-height: 1.5;">
                     <li>You might have reached your maximum requests limit per minute. Try again after a few seconds.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '500'} and (${support_data['request_type'] == 'Whois Live'}
-                            or ${support_data['request_type'] == 'Whois Historical'} or ${support_data['request_type'] == 'Whois Reverse'}
-                            or ${support_data['request_type'] == 'SSL Live'} or ${support_data['request_type'] == 'DNS Live'}
-                            or ${support_data['request_type'] == 'DNS Historical'} or ${support_data['request_type'] == 'DNS Reverse'})"
+                <ul th:if="${support_data['error_code'] == '500'} and (${support_data['request_type'] == 'Live Whois'}
+                            or ${support_data['request_type'] == 'Historical Whois'} or ${support_data['request_type'] == 'Reverse Whois'}
+                            or ${support_data['request_type'] == 'SSL Lookup'} or ${support_data['request_type'] == 'Live DNS'}
+                            or ${support_data['request_type'] == 'Historical DNS'} or ${support_data['request_type'] == 'Reverse DNS'})"
                     style="line-height: 1.5;">
                     <li>There might be an internal server error.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '503'} and (${support_data['request_type'] == 'Whois Live'}
-                            or ${support_data['request_type'] == 'Whois Historical'} or ${support_data['request_type'] == 'Whois Reverse'}
-                            or ${support_data['request_type'] == 'SSL Live'} or ${support_data['request_type'] == 'DNS Live'}
-                            or ${support_data['request_type'] == 'DNS Historical'} or ${support_data['request_type'] == 'DNS Reverse'})"
+                <ul th:if="${support_data['error_code'] == '503'} and (${support_data['request_type'] == 'Live Whois'}
+                            or ${support_data['request_type'] == 'Historical Whois'} or ${support_data['request_type'] == 'Reverse Whois'}
+                            or ${support_data['request_type'] == 'SSL Lookup'} or ${support_data['request_type'] == 'Live DNS'}
+                            or ${support_data['request_type'] == 'Historical DNS'} or ${support_data['request_type'] == 'Reverse DNS'})"
                     style="line-height: 1.5;">
                     <li>Service might be unavailable for now. Please try again after some time.</li>
                 </ul>
-                <ul th:if="${support_data['error_code'] == '504'} and (${support_data['request_type'] == 'Whois Live'}
-                            or ${support_data['request_type'] == 'Whois Historical'} or ${support_data['request_type'] == 'Whois Reverse'}
-                            or ${support_data['request_type'] == 'SSL Live'} or ${support_data['request_type'] == 'DNS Live'}
-                            or ${support_data['request_type'] == 'DNS Historical'} or ${support_data['request_type'] == 'DNS Reverse'})"
+                <ul th:if="${support_data['error_code'] == '504'} and (${support_data['request_type'] == 'Live Whois'}
+                            or ${support_data['request_type'] == 'Historical Whois'} or ${support_data['request_type'] == 'Reverse Whois'}
+                            or ${support_data['request_type'] == 'SSL Lookup'} or ${support_data['request_type'] == 'Live DNS'}
+                            or ${support_data['request_type'] == 'Historical DNS'} or ${support_data['request_type'] == 'Reverse DNS'})"
                     style="line-height: 1.5;">
                     <li>Your request might have been timed-out.</li>
                 </ul>
@@ -128,26 +128,26 @@
         </div>
         
         <p style="margin-bottom: -5px;">You can also read the documentation of
-            <span th:if="${support_data['request_type'] == 'Whois Live'}">
-                <a href="https://whoisfreaks.com/documentation/api/whois-api.html#live-whois-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Whois Live API</a>
+            <span th:if="${support_data['request_type'] == 'Live Whois'}">
+                <a href="https://whoisfreaks.com/documentation/api/whois-api.html#live-whois-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Live Whois API</a>
             </span>
-            <span th:if="${support_data['request_type'] == 'Whois Historical'}">
-                <a href="https://whoisfreaks.com/documentation/api/whois-api.html#historical-whois-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Whois Historical API</a>
+            <span th:if="${support_data['request_type'] == 'Historical Whois'}">
+                <a href="https://whoisfreaks.com/documentation/api/whois-api.html#historical-whois-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Historical Whois API</a>
             </span>
-            <span th:if="${support_data['request_type'] == 'Whois Reverse'}">
-                <a href="https://whoisfreaks.com/documentation/api/whois-api.html#reverse-whois-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Whois Reverse API</a>
+            <span th:if="${support_data['request_type'] == 'Reverse Whois'}">
+                <a href="https://whoisfreaks.com/documentation/api/whois-api.html#reverse-whois-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Reverse Whois API</a>
             </span>
-            <span th:if="${support_data['request_type'] == 'SSL Live'}">
-                <a href="https://whoisfreaks.com/documentation/api/ssl-certificate-api.html#live-ssl-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">SSL Live API</a>
+            <span th:if="${support_data['request_type'] == 'SSL Lookup'}">
+                <a href="https://whoisfreaks.com/documentation/api/ssl-certificate-api.html#live-ssl-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">SSL Certificate Lookup API</a>
             </span>
-            <span th:if="${support_data['request_type'] == 'DNS Live'}">
-                <a href="https://whoisfreaks.com/documentation/api/dns-lookup-api.html#live-dns-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">DNS Live API</a>
+            <span th:if="${support_data['request_type'] == 'Live DNS'}">
+                <a href="https://whoisfreaks.com/documentation/api/dns-lookup-api.html#live-dns-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Live DNS API</a>
             </span>
-            <span th:if="${support_data['request_type'] == 'DNS Historical'}">
-                <a href="https://whoisfreaks.com/documentation/api/dns-lookup-api.html#historical-dns-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">DNS Historical API</a>
+            <span th:if="${support_data['request_type'] == 'Historical DNS'}">
+                <a href="https://whoisfreaks.com/documentation/api/dns-lookup-api.html#historical-dns-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Historical DNS API</a>
             </span>
-            <span th:if="${support_data['request_type'] == 'DNS Reverse'}">
-                <a href="https://whoisfreaks.com/documentation/api/dns-lookup-api.html#reverse-dns-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">DNS Reverse API</a>
+            <span th:if="${support_data['request_type'] == 'Reverse DNS'}">
+                <a href="https://whoisfreaks.com/documentation/api/dns-lookup-api.html#reverse-dns-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Reverse DNS API</a>
             </span>
             for further details.
         </p>

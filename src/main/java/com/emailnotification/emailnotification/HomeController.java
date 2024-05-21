@@ -126,7 +126,7 @@ public class HomeController {
         Map<String, Object> supportData =  new HashMap<>();
         supportData.put("api_key", "42354545446421m9b6c0010d48bce892");
         supportData.put("error_code", "401");
-        supportData.put("request_type", "DNS Live");
+        supportData.put("request_type", "SSL Lookup");
 
         model.addAttribute("request_date", LocalDate.now());
         model.addAttribute("username", "XYZ");
