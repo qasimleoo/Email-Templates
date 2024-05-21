@@ -5,10 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -132,6 +129,29 @@ public class HomeController {
         model.addAttribute("support_data", supportData);
 
         return "support";
+    }
+
+    @GetMapping("/failure/status")
+    public String failedStatus(Model model) {
+
+        Map<String, List<Map.Entry<String, Object>>> failedStatusData = new HashMap<>();
+
+        failedStatusData.putIfAbsent("Live Whois Lookup", new ArrayList<>());
+        failedStatusData.get("Live Whois Lookup").add(new AbstractMap.SimpleEntry<>("429", 11));
+        failedStatusData.get("Live Whois Lookup").add(new AbstractMap.SimpleEntry<>("403", 23));
+
+        failedStatusData.putIfAbsent("Live Dns Lookup", new ArrayList<>());
+        failedStatusData.get("Live Dns Lookup").add(new AbstractMap.SimpleEntry<>("429", 30));
+        failedStatusData.get("Live Dns Lookup").add(new AbstractMap.SimpleEntry<>("403", 92));
+
+        failedStatusData.putIfAbsent("SSL Live Lookup", new ArrayList<>());
+        failedStatusData.get("SSL Live Lookup").add(new AbstractMap.SimpleEntry<>("429", 52));
+
+        model.addAttribute("username", "XYZ");
+        model.addAttribute("date", LocalDate.now());
+        model.addAttribute("failed_status_data", failedStatusData);
+
+        return "failureStatus";
     }
 
     public static class FieldChange {
