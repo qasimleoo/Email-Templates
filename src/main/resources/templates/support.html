@@ -129,7 +129,25 @@
         
         <p style="margin-bottom: -5px;">You can also read the documentation of
             <span th:if="${support_data['request_type'] == 'Whois Live'}">
-                <a href="https://whoisfreaks.com/documentation/api/whois-api.html#live-whois-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Whois API</a>
+                <a href="https://whoisfreaks.com/documentation/api/whois-api.html#live-whois-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Whois Live API</a>
+            </span>
+            <span th:if="${support_data['request_type'] == 'Whois Historical'}">
+                <a href="https://whoisfreaks.com/documentation/api/whois-api.html#historical-whois-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Whois Historical API</a>
+            </span>
+            <span th:if="${support_data['request_type'] == 'Whois Reverse'}">
+                <a href="https://whoisfreaks.com/documentation/api/whois-api.html#reverse-whois-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">Whois Reverse API</a>
+            </span>
+            <span th:if="${support_data['request_type'] == 'SSL Live'}">
+                <a href="https://whoisfreaks.com/documentation/api/ssl-certificate-api.html#live-ssl-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">SSL Live API</a>
+            </span>
+            <span th:if="${support_data['request_type'] == 'DNS Live'}">
+                <a href="https://whoisfreaks.com/documentation/api/dns-lookup-api.html#live-dns-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">DNS Live API</a>
+            </span>
+            <span th:if="${support_data['request_type'] == 'DNS Historical'}">
+                <a href="https://whoisfreaks.com/documentation/api/dns-lookup-api.html#historical-dns-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">DNS Historical API</a>
+            </span>
+            <span th:if="${support_data['request_type'] == 'DNS Reverse'}">
+                <a href="https://whoisfreaks.com/documentation/api/dns-lookup-api.html#reverse-dns-httpcodes" th:target="_blank" style="color:firebrick; font-weight: bold">DNS Reverse API</a>
             </span>
             for further details.
         </p>
