@@ -120,6 +120,21 @@ public class HomeController {
         return "brand";
     }
 
+    @GetMapping("/support")
+    public String support(Model model) {
+
+        Map<String, Object> supportData =  new HashMap<>();
+        supportData.put("api_key", "42354545446421m9b6c0010d48bce892");
+        supportData.put("error_code", "504");
+        supportData.put("request_type", "SSL");
+
+        model.addAttribute("request_date", LocalDate.now());
+        model.addAttribute("username", "XYZ");
+        model.addAttribute("support_data", supportData);
+
+        return "support";
+    }
+
     public static class FieldChange {
         private final String field;
         private final String old_value;
