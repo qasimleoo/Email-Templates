@@ -21,13 +21,13 @@
         </div>
 
         <div style="font-size: 17px; line-height: 0.7; margin-bottom: 25px;">
-            <p>On <span th:text="${date}" style="font-weight: bold; color: firebrick;"></span>, we have noticed that your requests have been failing with status codes <span style="font-weight: 600; color: firebrick">401</span> and <span style="font-weight: 600; color: firebrick">429</span>.
+            <p>On <span th:text="${date}" style="font-weight: bold; color: firebrick;"></span>, we have noticed that your requests have been failing with status code(s) <span style="font-weight: 600; color: firebrick" th:if="${contains401}">401</span> <span th:if="${contains429} and ${contains401}"> and </span> <span style="font-weight: 600; color: firebrick" th:if="${contains429}">429</span>.
             </p>
             <p>Do not worry at all, our team is here to help you resolve all the issues you have been facing.</p>
             <p>The table below displays all the lookup requests you have made, along with their status codes and the count of how many times each lookup has failed.</p>
         </div>
 
-        <table style="background: aliceblue; border-radius: 8px; width: 100%; text-align: center; border: 1px solid #858585; margin-top: 20px;">
+        <table style="background: aliceblue; border-radius: 8px; width: 100%; text-align: center; border: 1px solid #858585; margin-top: 20px;" th:if="${contains401} or ${contains429}">
             <tr>
                 <th style="width: 33.33%; background-color: #b22222; border: 1px solid #b8b7b7; color:#fff; padding: 10px; font-weight: bold; border-radius: 5px;">Lookup</th>
                 <th style="width: 33.33%; background-color: #b22222; border: 1px solid #b8b7b7; color:#fff; padding: 10px; font-weight: bold; border-radius: 5px;">Status Code</th>
@@ -46,9 +46,9 @@
             </tr>
         </table>
 
-        <p style="margin: 25px 0 -5px 0;">Following are some possible reasons for receiving status codes <span style="font-weight: 600; color: firebrick">401</span> and <span style="font-weight: 600; color: firebrick">429</span>:</p>
+        <p style="margin: 25px 0 -5px 0;">Following are some possible reasons for receiving status code(s) <span style="font-weight: 600; color: firebrick" th:if="${contains401}">401</span> <span th:if="${contains429} and ${contains401}"> and </span> <span style="font-weight: 600; color: firebrick" th:if="${contains429}">429</span>:</p>
         <ul style="line-height: 1.5; margin: 0 0 20px -20px;">
-            <li>
+            <li th:if="${contains401}">
                 <p style="font-weight: 600; color: firebrick; margin: 25px 0 5px 0; font-size: 18px;">401:</p>
                 <ol style="line-height: 1.5; margin-left: -20px;">
                     <li>Your API key might be <b>invalid</b>.</li>
@@ -60,11 +60,11 @@
                 </ol>
                 <p style="font-weight: 600; font-size: 18px; margin-top: 5px;">If you still have any queries, please reach out to us at <span style="color: firebrick; font-weight: 600;">support@whoisfreaks.com</span>.</p>
             </li>
-            <li>
+            <li th:if="${contains429}">
                 <p style="font-weight: 600; color: firebrick; margin: 15px 0 5px 0; font-size: 18px;">429:</p>
-                <ul style="line-height: 1.5; margin-left: -20px;">
+                <ol style="line-height: 1.5; margin-left: -20px;">
                     <li>Your have <b>reached your maximum request limit</b>. Please <b>upgrade your plan</b>, <b>buy a new plan</b>, or <b>add more API credits</b> to use APIs.</li>
-                </ul>
+                </ol>
                 <p style="font-weight: bold; font-size: 18px; margin-top: 5px;">For a better solution, please contact us at <span style="color: firebrick;">support@whoisfreaks.com</span></p>
             </li>
         </ul>
