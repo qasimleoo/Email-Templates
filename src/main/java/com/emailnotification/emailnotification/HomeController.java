@@ -134,33 +134,35 @@ public class HomeController {
     @GetMapping("/failure/status")
     public String failedStatus(Model model) {
 
-        Map<String, List<Map.Entry<String, Integer>>> failedStatusData = new HashMap<>();
+        Map<String, Map<String, Integer>> failedStats = new HashMap<>();
 
-        failedStatusData.putIfAbsent("Live Whois Lookup", new ArrayList<>());
-        failedStatusData.get("Live Whois Lookup").add(new AbstractMap.SimpleEntry<>("429", 11));
-        failedStatusData.get("Live Whois Lookup").add(new AbstractMap.SimpleEntry<>("401", 23));
+        failedStats.putIfAbsent("Live Whois Lookup", new HashMap<>());
+        failedStats.get("Live Whois Lookup").put("429", 11);
+        failedStats.get("Live Whois Lookup").put("401", 23);
 
-        failedStatusData.putIfAbsent("SSL Live Lookup", new ArrayList<>());
-        failedStatusData.get("SSL Live Lookup").add(new AbstractMap.SimpleEntry<>("429", 52));
-        failedStatusData.get("SSL Live Lookup").add(new AbstractMap.SimpleEntry<>("401", 0));
+        failedStats.putIfAbsent("Live Whois Lookup", new HashMap<>());
+        failedStats.get("Live Whois Lookup").put("429", 11);
+        failedStats.get("Live Whois Lookup").put("401", 23);
 
-        failedStatusData.putIfAbsent("Historical Dns Lookup", new ArrayList<>());
-        failedStatusData.get("Historical Dns Lookup").add(new AbstractMap.SimpleEntry<>("401", 21));
-        failedStatusData.get("Historical Dns Lookup").add(new AbstractMap.SimpleEntry<>("429", 19));
+        failedStats.putIfAbsent("SSL Live Lookup", new HashMap<>());
+        failedStats.get("SSL Live Lookup").put("429", 52);
+        failedStats.get("SSL Live Lookup").put("401", 0);
 
-        boolean contains429 = failedStatusData.values().stream()
-                .flatMap(List::stream)
-                .anyMatch(entry -> "429".equals(entry.getKey()) && entry.getValue() > 0);
+        failedStats.putIfAbsent("Historical Dns Lookup", new HashMap<>());
+        failedStats.get("Historical Dns Lookup").put("401", 21);
+        failedStats.get("Historical Dns Lookup").put("429", 19);
 
-        boolean contains401 = failedStatusData.values().stream()
-                .flatMap(List::stream)
-                .anyMatch(entry -> "401".equals(entry.getKey()) && entry.getValue() > 0);
+        boolean contains429 = failedStats.values().stream()
+                .anyMatch(statusMap -> statusMap.containsKey("429") && statusMap.get("429") > 0);
+
+        boolean contains401 = failedStats.values().stream()
+                .anyMatch(statusMap -> statusMap.containsKey("401") && statusMap.get("401") > 0);
 
         model.addAttribute("contains401", contains401);
         model.addAttribute("contains429", contains429);
         model.addAttribute("username", "XYZ");
         model.addAttribute("date", LocalDate.now());
-        model.addAttribute("failed_status_data", failedStatusData);
+        model.addAttribute("failedStats", failedStats);
 
         return "failureStatus";
     }

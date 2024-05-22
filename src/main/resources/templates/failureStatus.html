@@ -33,7 +33,7 @@
                 <th style="width: 33.33%; background-color: #b22222; border: 1px solid #b8b7b7; color:#fff; padding: 10px; font-weight: bold; border-radius: 5px;">Status Code</th>
                 <th style="width: 33.33%; background-color: #b22222; border: 1px solid #b8b7b7; color:#fff; padding: 10px; font-weight: bold; border-radius: 5px;">Failure Count</th>
             </tr>
-            <tr th:each="entry, counter : ${failed_status_data}">
+            <tr th:each="entry, counter : ${failedStats}">
                 <td th:text="${entry.key}" th:style="${counter.index % 2 == 1} ? 'background-color: #ccc; border: 1px solid #a1a1a1; padding: 5px; border-radius: 5px;' : 'background-color: #f1f1f1; border: 1px solid #a1a1a1; padding: 5px; border-radius: 5px;'"></td>
                 <td colspan="2">
                     <table style="border-radius: 8px; width: 100.5%; text-align: center; margin: -3px;">
