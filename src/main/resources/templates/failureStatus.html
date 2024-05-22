@@ -24,7 +24,7 @@
             <p style="line-height: 1.2;">On <span th:text="${date}" style="font-weight: bold; color: firebrick;"></span>, we have noticed that your requests have been failing with status code(s) <span style="font-weight: 600; color: firebrick" th:if="${contains401}">401</span> <span th:if="${contains429} and ${contains401}"> and </span> <span style="font-weight: 600; color: firebrick" th:if="${contains429}">429</span>.
             </p>
             <p style="line-height: 1.2;">Do not worry at all, our team is here to help you resolve all the issues you have been facing.</p>
-            <p style="line-height: 1.2;">The table below displays all the lookup requests you have made, along with their status codes and the count of how many times each lookup has failed.</p>
+            <p style="line-height: 1.2;">The table below shows your lookup requests and the count of failed lookups with <span style="font-weight: 600; color: firebrick" th:if="${contains401}">401</span> <span th:if="${contains429} and ${contains401}"> and </span> <span style="font-weight: 600; color: firebrick" th:if="${contains429}">429</span> status code(s):</p>
         </div>
 
         <table style="background: aliceblue; border-radius: 8px; width: 100%; text-align: center; border: 1px solid #858585; margin-top: 20px;" th:if="${contains401} or ${contains429}">
@@ -46,7 +46,9 @@
             </tr>
         </table>
 
-        <p style="margin: 25px 0 -5px 0; line-height: 1.5; font-size: 17px;">Following are some possible reasons for receiving status code(s) <span style="font-weight: 600; color: firebrick" th:if="${contains401}">401</span> <span th:if="${contains429} and ${contains401}"> and </span> <span style="font-weight: 600; color: firebrick" th:if="${contains429}">429</span>:</p>
+        <p style="margin: 25px 0 -5px 0; font-weight: 600; font-size: 18px; line-height: 1.2;">To address these issues, we recommend contacting us <span style="color: firebrick; font-weight: 600;">support@whoisfreaks.com</span>.</p>
+
+        <p style="line-height: 1.5; font-size: 17px;">But the following are some possible reasons for receiving status code(s) <span style="font-weight: 600; color: firebrick" th:if="${contains401}">401</span> <span th:if="${contains429} and ${contains401}"> and </span> <span style="font-weight: 600; color: firebrick" th:if="${contains429}">429</span>:</p>
         <ul style="line-height: 1.5; margin: 0 0 20px -20px;">
             <li th:if="${contains401}">
                 <p style="font-weight: 600; color: firebrick; margin: 25px 0 5px 0; font-size: 18px;">401:</p>
