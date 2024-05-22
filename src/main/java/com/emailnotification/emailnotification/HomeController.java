@@ -140,12 +140,9 @@ public class HomeController {
         failedStatusData.get("Live Whois Lookup").add(new AbstractMap.SimpleEntry<>("429", 11));
         failedStatusData.get("Live Whois Lookup").add(new AbstractMap.SimpleEntry<>("401", 23));
 
-        failedStatusData.putIfAbsent("Live Dns Lookup", new ArrayList<>());
-        failedStatusData.get("Live Dns Lookup").add(new AbstractMap.SimpleEntry<>("401", 9));
-        failedStatusData.get("Live Dns Lookup").add(new AbstractMap.SimpleEntry<>("429", 31));
-
         failedStatusData.putIfAbsent("SSL Live Lookup", new ArrayList<>());
         failedStatusData.get("SSL Live Lookup").add(new AbstractMap.SimpleEntry<>("429", 52));
+        failedStatusData.get("SSL Live Lookup").add(new AbstractMap.SimpleEntry<>("401", 0));
 
         failedStatusData.putIfAbsent("Historical Dns Lookup", new ArrayList<>());
         failedStatusData.get("Historical Dns Lookup").add(new AbstractMap.SimpleEntry<>("401", 21));
