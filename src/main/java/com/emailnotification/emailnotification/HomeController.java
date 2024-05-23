@@ -117,8 +117,23 @@ public class HomeController {
         return "brand";
     }
 
-    @GetMapping("/requests/stats")
+    @GetMapping("/support")
     public String support(Model model) {
+
+        Map<String, Object> supportData =  new HashMap<>();
+        supportData.put("api_key", "42354545446421m9b6c0010d48bce892");
+        supportData.put("error_code", "413");
+        supportData.put("request_type", "Live Dns Lookup");
+
+        model.addAttribute("username", "XYZ");
+        model.addAttribute("support_data", supportData);
+
+        return "support";
+    }
+
+
+    @GetMapping("/requests/stats")
+    public String multipleRequestsStats(Model model) {
 
         Map<String, List<String>> supportData =  new HashMap<>();
 
@@ -133,6 +148,7 @@ public class HomeController {
 
         return "multipleRequestsStats";
     }
+
 
     @GetMapping("/failure/status")
     public String failedStatus(Model model) {
