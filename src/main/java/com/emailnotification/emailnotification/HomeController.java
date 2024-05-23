@@ -120,10 +120,10 @@ public class HomeController {
     @GetMapping("/support")
     public String support(Model model) {
 
-        Map<String, List<Integer>> supportData =  new HashMap<>();
+        Map<String, List<String>> supportData =  new HashMap<>();
 
-        supportData.put("Live Whois Lookup", List.of(400, 401, 500));
-        supportData.put("Live Dns Lookup", List.of(412, 429, 413));
+        supportData.put("Live Whois Lookup", List.of("400", "401", "500"));
+        supportData.put("Live Dns Lookup", List.of("412", "429", "401", "413"));
 
         model.addAttribute("username", "XYZ");
         model.addAttribute("api_key", "42354545446421m9b6c0010d48bce892");
