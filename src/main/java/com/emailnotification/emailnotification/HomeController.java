@@ -124,6 +124,8 @@ public class HomeController {
 
         supportData.put("Live Whois Lookup", List.of("400", "401", "500"));
         supportData.put("Live Dns Lookup", List.of("412", "429", "401", "413"));
+        supportData.put("Historical Dns Lookup", List.of("504", "400", "404"));
+        supportData.put("SSL Live Lookup", List.of("503", "408"));
 
         model.addAttribute("username", "XYZ");
         model.addAttribute("api_key", "42354545446421m9b6c0010d48bce892");
