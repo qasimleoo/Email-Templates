@@ -59,7 +59,7 @@
                                 or ${entry.key == 'Historical Whois Lookup'} or ${entry.key == 'SSL Live Lookup'})">
                         <h3 style="font-size: 18px;color: firebrick;margin-bottom: -12px;">400:</h3>
                         <ul style="margin-left: -20px;">
-                            <li>You passed incorrect domainName parameter's value (correct formats are whoisfreaks.com, https://whoisfreaks.com, http://whoisfreaks.com).</li>
+                            <li>You passed an incorrect domain name value (correct formats are whoisfreaks.com, https://whoisfreaks.com, http://whoisfreaks.com). Please try again with the correct format value.</li>
                         </ul>
                     </th:block>
 
@@ -71,10 +71,17 @@
                     </th:block>
 
                     <th:block th:if="${code == '400'} and (${entry.key == 'Live Dns Lookup'}
-                                    or ${entry.key == 'Historical Dns Lookup'} or ${entry.key == 'Reverse Dns Lookup'})">
+                                    or ${entry.key == 'Historical Dns Lookup'})">
                         <h3 style="font-size: 18px;color: firebrick;margin-bottom: -12px;">400:</h3>
                         <ul style="margin-left: -20px;">
-                            <li>Could not process your request.</li>
+                            <li>Unable to process your request because you passed an incorrect domain name (correct formats are whoisfreaks.com, https://whoisfreaks.com, http://whoisfreaks.com). Please try again with the correct format value.</li>
+                        </ul>
+                    </th:block>
+
+                    <th:block th:if="${code == '400'} and (${entry.key == 'Reverse Dns Lookup'})">
+                        <h3 style="font-size: 18px;color: firebrick;margin-bottom: -12px;">400:</h3>
+                        <ul style="margin-left: -20px;">
+                                <li>Could not process your request because you passed an incorrect input parameter. Please try again with the correct format value of one of the following: A, AAAA, MX, NS, TXT, CNAME, SPF, or SOA record values.</li>
                         </ul>
                     </th:block>
 
