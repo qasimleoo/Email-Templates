@@ -5,10 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -118,6 +115,75 @@ public class HomeController {
         model.addAttribute("username", "user123");
 
         return "brand";
+    }
+
+    @GetMapping("/support")
+    public String support(Model model) {
+
+        Map<String, Object> supportData =  new HashMap<>();
+        supportData.put("api_key", "42354545446421m9b6c0010d48bce892");
+        supportData.put("error_code", "413");
+        supportData.put("request_type", "Live Dns Lookup");
+
+        model.addAttribute("username", "XYZ");
+        model.addAttribute("support_data", supportData);
+
+        return "support";
+    }
+
+
+    @GetMapping("/requests/stats")
+    public String multipleRequestsStats(Model model) {
+
+        Map<String, List<String>> supportData =  new HashMap<>();
+
+        supportData.put("Live Whois Lookup", List.of("400", "401", "500"));
+        supportData.put("Live Dns Lookup", List.of("412", "429", "400", "413"));
+        supportData.put("Reverse Dns Lookup", List.of("504", "400", "404"));
+        supportData.put("SSL Live Lookup", List.of("503", "408"));
+
+        model.addAttribute("username", "XYZ");
+        model.addAttribute("api_key", "42354545446421m9b6c0010d48bce892");
+        model.addAttribute("support_data", supportData);
+
+        return "multipleRequestsStats";
+    }
+
+
+    @GetMapping("/failure/status")
+    public String failedStatus(Model model) {
+
+        Map<String, Map<String, Integer>> failedStats = new HashMap<>();
+
+        failedStats.putIfAbsent("Live Whois Lookup", new HashMap<>());
+        failedStats.get("Live Whois Lookup").put("429", 11);
+        failedStats.get("Live Whois Lookup").put("401", 23);
+
+        failedStats.putIfAbsent("Live Whois Lookup", new HashMap<>());
+        failedStats.get("Live Whois Lookup").put("429", 11);
+        failedStats.get("Live Whois Lookup").put("401", 23);
+
+        failedStats.putIfAbsent("SSL Live Lookup", new HashMap<>());
+        failedStats.get("SSL Live Lookup").put("429", 52);
+        failedStats.get("SSL Live Lookup").put("401", 0);
+
+        failedStats.putIfAbsent("Historical Dns Lookup", new HashMap<>());
+        failedStats.get("Historical Dns Lookup").put("401", 21);
+        failedStats.get("Historical Dns Lookup").put("429", 19);
+
+        boolean contains429 = failedStats.values().stream()
+                .anyMatch(statusMap -> statusMap.containsKey("429") && statusMap.get("429") > 0);
+
+        boolean contains401 = failedStats.values().stream()
+                .anyMatch(statusMap -> statusMap.containsKey("401") && statusMap.get("401") > 0);
+
+        model.addAttribute("contains401", contains401);
+        model.addAttribute("contains429", contains429);
+        model.addAttribute("username", "XYZ");
+        model.addAttribute("date", LocalDate.now());
+        model.addAttribute("failedStats", failedStats);
+
+        return "failureStatus";
     }
 
     public static class FieldChange {
