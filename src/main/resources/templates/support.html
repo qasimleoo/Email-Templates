@@ -21,7 +21,7 @@
         </div>
         <div style="font-size: 17px; line-height: 0.7; margin-bottom: 25px;">
             <p style="line-height: 1.2;">We have observed that you made a <span style="font-weight: bold; color: firebrick;" th:text="${support_data['request_type']}"></span> request and received response with
-                <span style="color:firebrick; font-weight: bold;" th:text="${support_data['error_code']}"></span> status code for the first time.
+                <span style="color:firebrick; font-weight: bold;" th:text="${support_data['error_code']}"></span> status code for the <span style="color: firebrick; font-weight: bold;">first time in this month</span>.
             </p>
             <p style="line-height: 1.2;">Do not worry at all, our team is here to help you resolve this issue. </p>
             <p style="line-height: 1.2;">Your current API key is <span style="color: firebrick" th:text="${support_data['api_key']}"></span>.</p>
